@@ -2,6 +2,7 @@ const express = require("express");
 const { createOffer, updateOffer, deleteOffer, getProductOffers } = require("../controllers/Offers");
 const { createProduct, updateProduct, getAllProdcuts, deleteProduct } = require("../controllers/Product");
 const { addRatingAndReview, getReviews } = require("../controllers/RatingAndReview");
+const { auth } = require("../middlewares/auth");
 
 const router = express.Router()
 
@@ -14,7 +15,7 @@ router.delete("/deleteProduct" , deleteProduct)
 
 // Offer Routes
 
-router.post("/createOffer" , createOffer)
+router.post("/createOffer" , auth , createOffer)
 router.put("/updateOffer" , updateOffer)
 router.delete("/deleteOffer" , deleteOffer)
 router.get("/getProductOffers/:id" , getProductOffers)
