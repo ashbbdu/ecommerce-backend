@@ -1,5 +1,5 @@
 const express = require("express");
-const { createOffer } = require("../controllers/Offers");
+const { createOffer, updateOffer } = require("../controllers/Offers");
 const { createProduct, updateProduct, getAllProdcuts, deleteProduct } = require("../controllers/Product");
 
 const router = express.Router()
@@ -14,6 +14,7 @@ router.delete("/deleteProduct" , deleteProduct)
 // Offer Routes
 
 router.post("/createOffer" , createOffer)
+router.put("/updateOffer" , updateOffer)
 
 // Product Routes
 
