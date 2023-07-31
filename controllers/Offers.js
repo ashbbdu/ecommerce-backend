@@ -94,7 +94,6 @@ module.exports.getProductOffers = async (req, res) => {
 
     const getOffers = await Product.findById({_id : id}).populate("offers").exec()
     const offers = getOffers.offers
-    // const offers = getOffers.offers
     res.status(200).json({
         success : true,
         message : "Offers fetched successfully",
