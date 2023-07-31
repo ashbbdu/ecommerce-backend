@@ -6,9 +6,7 @@ module.exports.updateProfile = async (req , res) => {
         const {gender , dateOfBirth , about , contactNumber} = req.body
         const id = req.user.id;
         const profileDetails = await User.findById({_id : id}).populate("additionalDetails")
-        const details = profileDetails.additionalDetails
-        console.log(details , "details")
-        console.log(id , "ashishId")
+        const details = profileDetails.additionalDetails;
 
         details.gender = gender,
         details.dateOfBirth = dateOfBirth,
@@ -25,7 +23,14 @@ module.exports.updateProfile = async (req , res) => {
 
      
     } 
-    catch (e) {
-
+    catch (error) {
+        console.log(error)
+        return res.status(404).json({
+            success : false,
+            message : "Unable to update profile , please try again"
+        })
     }
 }
+
+
+
