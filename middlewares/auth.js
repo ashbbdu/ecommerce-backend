@@ -46,9 +46,10 @@ module.exports.isBuyer = async (req, res, next) => {
         success: false, 
         message: `User Role Can't be Verified` });
   }
+  next();
 };
 
-module.exports.isBuyer = async (req, res, next) => {
+module.exports.isSeller = async (req, res, next) => {
     try {
       const user = await User.findOne({ email: req.user.email });
       if (user.accountType !== "Seller") {
@@ -62,9 +63,10 @@ module.exports.isBuyer = async (req, res, next) => {
           success: false, 
           message: `User Role Can't be Verified` });
     }
+    next();
   };
 
-  module.exports.isBuyer = async (req, res, next) => {
+  module.exports.isAdmin = async (req, res, next) => {
     try {
       const user = await User.findOne({ email: req.user.email });
       if (user.accountType !== "Admin") {
@@ -73,9 +75,11 @@ module.exports.isBuyer = async (req, res, next) => {
           message: "This is a protected route for Admin",
         });
       }
+      next();
     } catch (error) {
       return res.status(500).json({ 
           success: false, 
           message: `User Role Can't be Verified` });
     }
+
   };
