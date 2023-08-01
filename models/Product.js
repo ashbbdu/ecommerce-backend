@@ -27,6 +27,11 @@ const Product = new mongoose.Schema({
         required : true,
         ref : "Offers"
    }],
+   userProduct : [{
+      type : mongoose.Schema.Types.ObjectId,
+      ref : "User"
+ }]
+   ,
    ratingAndReview : [
       {
          type : mongoose.Schema.Types.ObjectId,
