@@ -129,7 +129,11 @@ module.exports.updateProduct = async (req, res) => {
 
 module.exports.getAllProdcuts = async (req, res) => {
   try {
-    const getProdcuts = await Product.find({}).populate("offers");
+    const getProdcuts = await Product.find({})
+                          .populate("offers")
+                          .limit(10)
+                          .sort({ name: 1 })
+                          .exec();
     res.status(200).json({
       success: true,
       message: "Products fetched successfully",
@@ -175,4 +179,3 @@ module.exports.deleteProduct = async (req, res) => {
     });
   }
 };
-
