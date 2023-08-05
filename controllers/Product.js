@@ -129,11 +129,21 @@ module.exports.updateProduct = async (req, res) => {
 
 module.exports.getAllProdcuts = async (req, res) => {
   try {
-    const getProdcuts = await Product.find({})
-                          .populate("offers")
-                          .limit(10)
-                          .sort({ name: 1 })
-                          .exec();
+    const getProdcuts = await Product.find({
+      $expr: {
+        $regexMatch: {
+          input: {
+            $concat: ["$name", "", "$title"],
+          },
+          regex: "",    //Your text search here
+          options: "i",
+        },
+      },
+    })
+      .populate("offers")
+      .limit(10)
+      .sort({ name: 1 })
+      .exec();
     res.status(200).json({
       success: true,
       message: "Products fetched successfully",
